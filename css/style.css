@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:300');
+
+body {
+	background-color: #fafafa;
+	margin: 0px;
+
+	font-family: Avenir, Muli, sans-serif;
+}
+
+h2,
+#information,
+.score-row {
+	color: #555555;
+}
+
+hr {
+	border: none;
+	border-top: solid 1px #b9975b;
+}
+
+img {
+	max-width: 100%;
+	max-height: 200px;
+}
+
+button {
+	font-size: 20px;
+	font-family: inherit;
+	font-weight: bold;
+	min-width: 30px;
+	border: none;
+	background-color: #b9975b;
+	color: white;
+	border: 1px solid #876a38;
+}
+
+#top-bar {
+	background-color: #115740;
+	color: white;
+	padding: 10px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#top-bar h1,
+p {
+	margin: 0px;
+}
+
+#top-bar #hole-select {
+	color: white;
+}
+
+@media (min-width: 600px) {
+	#content {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+	}
+	
+	#scores {
+		flex: 1 0 auto;
+	}
+	
+	#information {
+		flex: 0 1 50%;
+	}
+
+	#content > :first-child {
+		margin-right: 0px;
+	}
+}
+
+#content > * {
+	margin: 15px;
+	background-color: white;
+	border-radius: 10px;
+	border: solid 1px #d0d3d4;
+	overflow: hidden;
+}
+
+#scores, #information-text {
+	padding: 15px;
+}
+
+h2 {
+	margin-top: 0px;
+}
+
+#location {
+	background-color: #d0d3d4;
+	color: #115740;
+	margin-top: 10px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+#toggle-view {
+	display: flex;
+	cursor: pointer;
+}
+
+#toggle-view p {
+	flex-grow: 1;
+	text-align: center;
+	background-color: #AFB2B3;
+	padding: 10px;
+}
+
+#toggle-view p.active,
+#toggle-view p.active:hover {
+	background-color: #d0d3d4;
+}
+
+#toggle-view p:hover {
+	background-color: #BEC1C2;
+}
+
+#images {
+	display: block;
+}
+
+#map {
+	padding: 15px;
+	display: none;
+}
+
+.images-half {
+	padding-top: 10px;
+	text-align: center;
+}
+
+.image-label {
+	text-align: left;
+	background-color: #AFB2B3;
+	padding: 10px;
+}
+
+.score-row {
+	border-top: solid 1px #b9975b;
+	padding: 10px;
+
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.score-row:first-child {
+	margin-top: 0px;
+}
+
+.score-row > * {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.score-row :first-child {
+	margin-left: 0px;
+}
+
+.player {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 200px;
+}
+
+.player,
+#add-player :first-child {
+	margin-left: 0px;
+	margin-right: auto;
+}
+
+.score-row :last-child {
+	margin-right: 0px;
+}
+
+.total,
+.points {
+	text-align: center;
+	text-transform: uppercase;
+	white-space: nowrap;
+	color: #115740;
+	font-size: 80%;
+}
+
+input {
+	background-color: white;
+	border: solid 2px #876a38;
+	font-family: inherit;
+	padding: 5px;
+}
+
+#footer {
+	text-align: center;
+}
