@@ -110,8 +110,7 @@ h2 {
 	padding: 10px;
 }
 
-#toggle-view p.active,
-#toggle-view p.active:hover {
+#toggle-view p.active, #toggle-view p.active:hover {
 	background-color: #d0d3d4;
 }
 
@@ -168,8 +167,7 @@ h2 {
 	max-width: 200px;
 }
 
-.player,
-#add-player :first-child {
+.player, #add-player :first-child {
 	margin-left: 0px;
 	margin-right: auto;
 }
@@ -178,8 +176,7 @@ h2 {
 	margin-right: 0px;
 }
 
-.total,
-.points {
+.total, .points {
 	text-align: center;
 	text-transform: uppercase;
 	white-space: nowrap;
