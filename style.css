@@ -118,6 +118,14 @@ h2 {
 	background-color: #BEC1C2;
 }
 
+#info-text p {
+	margin-bottom: 15px;
+}
+
+#info-text p:last-child {
+	margin-bottom: 0px;
+}
+
 #images {
 	display: block;
 }

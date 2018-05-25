@@ -38,7 +38,7 @@
 					<div id="information-text">
 						<h2>Info: Hole {{ hole }}</h2>
 						<hr>
-						<p class="info-text">{{ holeInfo[hole - 1].info }}</p>
+						<div id="info-text" v-html="holeInfo[hole - 1].info"></div>
 					</div>
 					<div id="location">
 						<div id="toggle-view">
