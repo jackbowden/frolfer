@@ -23,14 +23,14 @@
 					<div class="score-row" v-for="player in players">
 						<p><button @click="removePlayer(player)">x</button></p>
 						<p class="player">{{ player.name }}</p>
-						<p class="total">Total<br><strong>{{ total(player) }}</strong></p>
-						<p class="points">This hole<br><strong>{{ player.points[hole - 1] }}</strong></p>
+						<p class="number">Total<br><strong>{{ total(player) }}</strong></p>
+						<p class="number">Hole {{ hole }}<br><strong>{{ player.points[hole - 1] }}</strong></p>
 						<p><button @click="$set(player.points, hole - 1, player.points[hole - 1] + 1)">+</button></p>
 						<p><button @click="$set(player.points, hole - 1, player.points[hole - 1] - 1)">-</button></p>
 					</div>
-					<div id="add-player" class="score-row">
+					<div id="add-player">
 						<p><input type="text" v-model="name" v-on:keyup.enter="addPlayer(name)" placeholder="Add player..."></p>
-						<p><button @click="addPlayer(name)">Add</button></p>
+						<p id="add-button"s><button @click="addPlayer(name)">Add</button></p>
 					</div>
 				</div>
 

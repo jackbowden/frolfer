@@ -89,6 +89,85 @@ h2 {
 	margin-top: 0px;
 }
 
+.score-row, #add-player {
+	border-top: solid 1px #b9975b;
+	padding: 10px;
+
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.score-row:first-child {
+	margin-top: 0px;
+}
+
+.score-row > * {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.score-row :first-child {
+	margin-left: 0px;
+}
+
+.player {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 200px;
+}
+
+.player, #add-player :first-child {
+	margin-left: 0px;
+	margin-right: auto;
+}
+
+.score-row :last-child {
+	margin-right: 0px;
+}
+
+.number {
+	text-align: center;
+	text-transform: uppercase;
+	white-space: nowrap;
+	color: #115740;
+	font-size: 80%;
+}
+
+input {
+	background-color: white;
+	border: solid 2px #876a38;
+	font-family: inherit;
+	padding: 5px;
+}
+
+#add-button {
+	margin-left: 10px;
+}
+
+@media (max-width: 450px) {
+	.score-row, #add-player {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	
+	.score-row button {
+		font-size: 80%;
+		padding: 6px 0px;
+	}
+	
+	.score-row > * {
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	
+	.player, #add-player :first-child {
+		margin-left: 0px;
+		margin-right: auto;
+	}
+}
+
 #location {
 	background-color: #d0d3d4;
 	color: #115740;
@@ -144,59 +223,6 @@ h2 {
 	text-align: left;
 	background-color: #AFB2B3;
 	padding: 10px;
-}
-
-.score-row {
-	border-top: solid 1px #b9975b;
-	padding: 10px;
-
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-.score-row:first-child {
-	margin-top: 0px;
-}
-
-.score-row > * {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.score-row :first-child {
-	margin-left: 0px;
-}
-
-.player {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: 200px;
-}
-
-.player, #add-player :first-child {
-	margin-left: 0px;
-	margin-right: auto;
-}
-
-.score-row :last-child {
-	margin-right: 0px;
-}
-
-.total, .points {
-	text-align: center;
-	text-transform: uppercase;
-	white-space: nowrap;
-	color: #115740;
-	font-size: 80%;
-}
-
-input {
-	background-color: white;
-	border: solid 2px #876a38;
-	font-family: inherit;
-	padding: 5px;
 }
 
 #footer {
