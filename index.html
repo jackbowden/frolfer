@@ -1,85 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" >
 
-<head>
-  <meta charset="UTF-8">
-  <title>Frolfer</title>
-  <script src="https://unpkg.com/vue"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  
-      <link rel="stylesheet" href="style.css">
-
-  
-</head>
-
-<body>
-
-  <div id="app">
-	<div id="top-bar">
-		<h1>Frolfer</h1>
-		<div id="hole-select">
-			<p><button @click="decHole">&lt;</button> Hole {{ hole }} <button @click="incHole">&gt;</button></p>
-		</div>
-	</div>
-	<div id="content">
-		<div id="scores">
-			<h2>Scores</h2>
-			<div class="score-row" v-for="player in players">
-				<p><button @click="removePlayer(player)">x</button></p>
-				<p class="player">{{ player.name }}</p>
-				<p class="total">Total<br><strong>{{ total(player) }}</strong></p>
-				<p class="points">This hole<br><strong>{{ player.points[hole - 1] }}</strong></p>
-				<p><button @click="$set(player.points, hole - 1, player.points[hole - 1] + 1)">+</button></p>
-				<p><button @click="$set(player.points, hole - 1, player.points[hole - 1] - 1)">-</button></p>
-			</div>
-			<div id="add-player" class="score-row">
-				<p><input type="text" v-model="name" v-on:keyup.enter="addPlayer(name)" placeholder="Add player..."></p>
-				<p><button @click="addPlayer(name)">Add</button></p>
-			</div>
-		</div>
-
-		<div id="information">
-			<div id="information-text">
-				<h2>Info: Hole {{ hole }}</h2>
-				<hr>
-				<p class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vehicula felis sed dui molestie rutrum. Integer auctor purus massa, at faucibus libero fringilla at. In velit turpis, condimentum ut eros et, lacinia venenatis dui.</p>
-			</div>
-			<div id="location">
-				<div id="toggle-view">
-					<p class="active" id="toggle-images-button">Images</p>
-					<p id="toggle-map-button">Map</p>
+	<head>
+		<meta charset="UTF-8">
+		<title>Frolfer</title>
+		<script src="https://unpkg.com/vue"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div id="app">
+			<div id="top-bar">
+				<h1>Frolfer</h1>
+				<div id="hole-select">
+					<p><button @click="decHole">&lt;</button> Hole {{ hole }} <button @click="incHole">&gt;</button></p>
 				</div>
-				<div id="images">
-					<div class="images-half" id="start">
-						<img src="https://scdbwiki.swem.wm.edu/wiki/images/b/b6/Oliver_sculpture.jpg">
-						<p class="image-label">Start</p>
+			</div>
+			<div id="content">
+				<div id="scores">
+					<h2>Scores</h2>
+					<div class="score-row" v-for="player in players">
+						<p><button @click="removePlayer(player)">x</button></p>
+						<p class="player">{{ player.name }}</p>
+						<p class="total">Total<br><strong>{{ total(player) }}</strong></p>
+						<p class="points">This hole<br><strong>{{ player.points[hole - 1] }}</strong></p>
+						<p><button @click="$set(player.points, hole - 1, player.points[hole - 1] + 1)">+</button></p>
+						<p><button @click="$set(player.points, hole - 1, player.points[hole - 1] - 1)">-</button></p>
 					</div>
-					<div class="images-half" id="finish">
-						<img src="https://scdbwiki.swem.wm.edu/wiki/images/6/67/Curled_up_c_sculpture.jpg">
-						<p class="image-label">Finish</p>
+					<div id="add-player" class="score-row">
+						<p><input type="text" v-model="name" v-on:keyup.enter="addPlayer(name)" placeholder="Add player..."></p>
+						<p><button @click="addPlayer(name)">Add</button></p>
 					</div>
 				</div>
 
-				<div id="map">
-					<iframe src="https://www.google.com/maps/d/u/1/embed?mid=1sF2h2uMQ23XYcj7APuWTyjHhxIA" width="100%" height="480"></iframe>
+				<div id="information">
+					<div id="information-text">
+						<h2>Info: Hole {{ hole }}</h2>
+						<hr>
+						<p class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vehicula felis sed dui molestie rutrum. Integer auctor purus massa, at faucibus libero fringilla at. In velit turpis, condimentum ut eros et, lacinia venenatis dui.</p>
+					</div>
+					<div id="location">
+						<div id="toggle-view">
+							<p class="active" id="toggle-images-button">Images</p>
+							<p id="toggle-map-button">Map</p>
+						</div>
+						<div id="images">
+							<div class="images-half" id="start">
+								<img src="https://scdbwiki.swem.wm.edu/wiki/images/b/b6/Oliver_sculpture.jpg">
+								<p class="image-label">Start</p>
+							</div>
+							<div class="images-half" id="finish">
+								<img src="https://scdbwiki.swem.wm.edu/wiki/images/6/67/Curled_up_c_sculpture.jpg">
+								<p class="image-label">Finish</p>
+							</div>
+						</div>
+
+						<div id="map">
+							<iframe src="https://www.google.com/maps/d/u/1/embed?mid=1sF2h2uMQ23XYcj7APuWTyjHhxIA" width="100%" height="480"></iframe>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div id="footer">
-	<p>by <a href="http://theycallmezeal.me">Adam</a> and <a href="http://jackbowden.me">Jack</a></p>
-</div>
-  
-  
-
-    <script  src="script.js"></script>
-
-
-
-
-</body>
+		<div id="footer">
+			<p>by <a href="http://theycallmezeal.me">Adam</a> and <a href="http://jackbowden.me">Jack</a></p>
+		</div>
+		<script src="script.js"></script>
+	</body>
 
 </html>
