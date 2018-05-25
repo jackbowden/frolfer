@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>Frolfer</title>
 		<script src="https://unpkg.com/vue" defer></script>
+		<script src="holeinfo.js" defer></script>
 		<script src="script.js" defer></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
@@ -37,7 +38,7 @@
 					<div id="information-text">
 						<h2>Info: Hole {{ hole }}</h2>
 						<hr>
-						<p class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vehicula felis sed dui molestie rutrum. Integer auctor purus massa, at faucibus libero fringilla at. In velit turpis, condimentum ut eros et, lacinia venenatis dui.</p>
+						<p class="info-text">{{ holeInfo[hole - 1].info }}</p>
 					</div>
 					<div id="location">
 						<div id="toggle-view">
@@ -46,17 +47,17 @@
 						</div>
 						<div id="images">
 							<div class="images-half" id="start">
-								<img src="https://scdbwiki.swem.wm.edu/wiki/images/b/b6/Oliver_sculpture.jpg">
+								<img :src="holeInfo[hole - 1].startImg" :alt="'Hole ' + hole + ' start'">
 								<p class="image-label">Start</p>
 							</div>
 							<div class="images-half" id="finish">
-								<img src="https://scdbwiki.swem.wm.edu/wiki/images/6/67/Curled_up_c_sculpture.jpg">
+								<img :src="holeInfo[hole - 1].endImg" alt="'Hole ' + hole + ' end'">
 								<p class="image-label">Finish</p>
 							</div>
 						</div>
 
 						<div id="map">
-							<iframe src="https://www.google.com/maps/d/u/1/embed?mid=1sF2h2uMQ23XYcj7APuWTyjHhxIA" width="100%" height="480"></iframe>
+							<iframe :src="holeInfo[hole - 1].map" width="100%" height="480"></iframe>
 						</div>
 					</div>
 				</div>

@@ -15,6 +15,7 @@ function Player(name) {
 const app = new Vue({
 	el: "#app",
 	data: {
+		holeInfo: holeInfo,
 		hole: 1,
 		players: [],
 		name: ""
