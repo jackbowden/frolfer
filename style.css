@@ -197,12 +197,24 @@ input {
 	background-color: #BEC1C2;
 }
 
-#info-text p {
-	margin-bottom: 15px;
+.label {
+	background-color: #B9975B;
+	color: white;
+	font-weight: bold;
+	font-size: 85%;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #876a38;
 }
 
-#info-text p:last-child {
-	margin-bottom: 0px;
+.labeled-info {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	line-height: 25px;
+}
+
+#info-text p:not(:last-child) {
+	margin-bottom: 15px;
 }
 
 #images {

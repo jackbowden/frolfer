@@ -38,6 +38,8 @@
 					<div id="information-text">
 						<h2>Hole {{ hole }}</h2>
 						<hr>
+						<p class="labeled-info"><span class="label">TARGET</span> {{ holeInfo[hole - 1].target }}</p>
+						<p class="labeled-info"><span class="label">WATCH FOR</span> {{ holeInfo[hole-1].watchFor }}</p>
 						<div id="info-text" v-html="holeInfo[hole - 1].info"></div>
 					</div>
 					<div id="location">
