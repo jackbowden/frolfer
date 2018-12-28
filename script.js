@@ -54,6 +54,14 @@ const app = new Vue({
 					this.players.splice(i, 1);
 				}
 			}
+		},
+		
+		incPoints: function(player, hole) {
+			this.$set(player.points, hole - 1, player.points[hole - 1] + 1)
+		},
+		
+		decPoints: function(player, hole) {
+			this.$set(player.points, hole - 1, player.points[hole - 1] - 1)
 		}
 	}
 });

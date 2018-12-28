@@ -25,8 +25,8 @@
 						<p class="player">{{ player.name }}</p>
 						<p class="number">Total<br><strong>{{ total(player) }}</strong></p>
 						<p class="number">Hole {{ hole }}<br><strong>{{ player.points[hole - 1] }}</strong></p>
-						<p><button @click="$set(player.points, hole - 1, player.points[hole - 1] + 1)">+</button></p>
-						<p><button @click="$set(player.points, hole - 1, player.points[hole - 1] - 1)">-</button></p>
+						<p><button @click="incPoints(player, hole)">+</button></p>
+						<p><button @click="decPoints(player, hole)">-</button></p>
 					</div>
 					<div id="add-player">
 						<p><input type="text" v-model="name" v-on:keyup.enter="addPlayer(name)" placeholder="Add player..."></p>
