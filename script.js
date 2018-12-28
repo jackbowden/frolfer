@@ -51,7 +51,8 @@ const app = new Vue({
 		removePlayer: function(player) {
 			for (var i = 0; i < this.players.length; i++) {
 				if (this.players[i].id == player.id) {
-					this.players.splice(i, 1);
+					this.$delete(this.players, i);
+					return;
 				}
 			}
 		},
