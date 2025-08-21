@@ -18,9 +18,28 @@ const app = new Vue({
 		holeInfo: holeInfo,
 		hole: 1,
 		players: [],
-		name: ""
+		name: "",
+		gameStarted: false,
+		showInstructions: false,
+		showImages: true
 	},
 	methods: {
+		startGame: function() {
+			this.gameStarted = true;
+		},
+
+		closeInstructions: function() {
+			this.showInstructions = false;
+		},
+
+		toggleImages: function() {
+			this.showImages = true;
+		},
+
+		toggleMap: function() {
+			this.showImages = false;
+		},
+
 		incHole: function() {
 			if (this.hole < 18) {
 				this.hole++;
@@ -66,22 +85,3 @@ const app = new Vue({
 		}
 	}
 });
-
-var toggleImagesButton = document.getElementById("toggle-images-button");
-var toggleMapButton = document.getElementById("toggle-map-button");
-var imageView = document.getElementById("images");
-var mapView = document.getElementById("map");
-
-toggleImagesButton.onclick = function() {
-	toggleImagesButton.className = "active";
-	toggleMapButton.className = "";
-	imageView.style.display = "block";
-	mapView.style.display = "none";
-};
-
-toggleMapButton.onclick = function() {
-	toggleMapButton.className = "active";
-	toggleImagesButton.className = "";
-	mapView.style.display = "block";
-	imageView.style.display = "none";
-};

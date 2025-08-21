@@ -44,6 +44,27 @@ button {
 	align-items: center;
 }
 
+#top-bar-controls {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.how-to-play-btn {
+	background-color: #b9975b;
+	color: white;
+	border: 1px solid #876a38;
+	padding: 8px 16px;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.how-to-play-btn:hover {
+	background-color: #c4a366;
+}
+
 #top-bar h1,
 p {
 	margin: 0px;
@@ -217,13 +238,9 @@ input {
 	margin-bottom: 15px;
 }
 
-#images {
-	display: block;
-}
-
 #map {
 	padding: 15px;
-	display: none;
+	/* display controlled by Vue.js v-show */
 }
 
 .images-half {
@@ -239,4 +256,191 @@ input {
 
 #footer {
 	text-align: center;
+}
+
+/* Start Page Styles */
+#start-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #115740 0%, #1a7a56 100%);
+	color: white;
+}
+
+#start-content {
+	text-align: center;
+	max-width: 600px;
+	padding: 40px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+#start-content h1 {
+	font-size: 3rem;
+	margin-bottom: 20px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.intro-text {
+	font-size: 1.2rem;
+	line-height: 1.6;
+	margin-bottom: 40px;
+	text-align: left;
+}
+
+#start-buttons {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.start-btn {
+	padding: 15px 30px;
+	font-size: 1.2rem;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	min-width: 150px;
+}
+
+.start-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.start-btn.primary {
+	background-color: #b9975b;
+	border-color: #876a38;
+}
+
+.start-btn.primary:hover {
+	background-color: #c4a366;
+}
+
+/* Instructions Modal */
+#instructions-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modal-content {
+	background: white;
+	border-radius: 10px;
+	max-width: 600px;
+	max-height: 80vh;
+	overflow-y: auto;
+	color: #333;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+	background: #115740;
+	color: white;
+	padding: 20px;
+	border-radius: 10px 10px 0 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.modal-header h2 {
+	margin: 0;
+	color: white;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	color: white;
+	font-size: 2rem;
+	cursor: pointer;
+	padding: 0;
+	min-width: auto;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.close-btn:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 50%;
+}
+
+.modal-body {
+	padding: 30px;
+}
+
+.modal-body h3 {
+	color: #115740;
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.modal-body h3:first-child {
+	margin-top: 0;
+}
+
+.modal-body p {
+	margin-bottom: 10px;
+	line-height: 1.5;
+}
+
+.modal-body ul {
+	margin-left: 20px;
+}
+
+.modal-body li {
+	margin-bottom: 8px;
+	line-height: 1.5;
+}
+
+.modal-footer {
+	padding: 20px;
+	text-align: center;
+	border-top: 1px solid #eee;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	#start-content {
+		margin: 20px;
+		padding: 30px 20px;
+	}
+	
+	#start-content h1 {
+		font-size: 2.5rem;
+	}
+	
+	.intro-text {
+		font-size: 1.1rem;
+	}
+	
+	#start-buttons {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.modal-content {
+		margin: 20px;
+		max-height: calc(100vh - 40px);
+	}
+	
+	.modal-body {
+		padding: 20px;
+	}
 }

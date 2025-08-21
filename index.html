@@ -12,12 +12,62 @@
 	</head>
 	<body>
 		<div id="app">
-			<div id="top-bar">
-				<h1>Frolfer</h1>
-				<div id="hole-select">
-					<p><button @click="decHole">&lt;</button> Hole {{ hole }} <button @click="incHole">&gt;</button></p>
+			<!-- Start Page -->
+			<div id="start-page" v-if="!gameStarted">
+				<div id="start-content">
+					<h1>Welcome to Frolfer</h1>
+					<p class="intro-text">
+						Explore the historic campus frisbee golf course at William & Mary! Frolfer is your ultimate companion for navigating and scoring on this classic 18-hole course. Track your scores, get hole information, and enjoy your round through one of the most beautiful college campuses in the country.
+					</p>
+					<div id="start-buttons">
+						<button @click="showInstructions = true" class="start-btn">How to Play</button>
+						<button @click="startGame" class="start-btn primary">Start Playing</button>
+					</div>
 				</div>
 			</div>
+
+			<!-- Instructions Modal -->
+			<div id="instructions-modal" v-if="showInstructions" @click="closeInstructions">
+				<div class="modal-content" @click.stop>
+					<div class="modal-header">
+						<h2>How to Play</h2>
+						<button @click="closeInstructions" class="close-btn">&times;</button>
+					</div>
+					<div class="modal-body">
+						<h3>Getting Started</h3>
+						<p>1. Add players by typing their names and clicking "Add"</p>
+						<p>2. Navigate between holes using the arrow buttons</p>
+						<p>3. Record scores using the + and - buttons for each player</p>
+						
+						<h3>Hole Information</h3>
+						<p>Each hole shows you:</p>
+						<ul>
+							<li><strong>Target:</strong> What you're aiming for</li>
+							<li><strong>Watch For:</strong> Important obstacles or features</li>
+							<li><strong>Images:</strong> Start and finish positions</li>
+							<li><strong>Map:</strong> Overall course layout</li>
+						</ul>
+						
+						<h3>Scoring</h3>
+						<p>Use the + and - buttons next to each player's name to adjust their score for the current hole. The total score is automatically calculated.</p>
+					</div>
+					<div class="modal-footer">
+						<button @click="closeInstructions" class="start-btn primary">Got it!</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Game Page -->
+			<div id="game-page" v-if="gameStarted">
+				<div id="top-bar">
+					<h1>Frolfer</h1>
+					<div id="top-bar-controls">
+						<button @click="showInstructions = true" class="how-to-play-btn">How to Play</button>
+						<div id="hole-select">
+							<p><button @click="decHole">&lt;</button> Hole {{ hole }} <button @click="incHole">&gt;</button></p>
+						</div>
+					</div>
+				</div>
 			<div id="content">
 				<div id="scores">
 					<h2>Scores</h2>
@@ -45,10 +95,10 @@
 					</div>
 					<div id="location">
 						<div id="toggle-view">
-							<p class="active" id="toggle-images-button">Images</p>
-							<p id="toggle-map-button">Map</p>
+							<p :class="{ active: showImages }" @click="toggleImages">Images</p>
+							<p :class="{ active: !showImages }" @click="toggleMap">Map</p>
 						</div>
-						<div id="images">
+						<div id="images" v-show="showImages">
 							<div class="images-half" id="start">
 								<img :src="'img/' + hole + 'start.jpg'" alt="Start of the hole" :title="'Hole ' + hole + ' start'">
 								<p class="image-label">Start</p>
@@ -59,12 +109,13 @@
 							</div>
 						</div>
 
-						<div id="map">
+						<div id="map" v-show="!showImages">
 							<iframe src="https://www.google.com/maps/d/u/1/embed?mid=1sF2h2uMQ23XYcj7APuWTyjHhxIA" width="100%" height="480" title="Map of the hole location"></iframe>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- End Game Page -->
 		</div>
 
 		<div id="footer">
