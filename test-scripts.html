@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Coordinates</title>
+</head>
+<body>
+    <h1>Testing Script Loading</h1>
+    <div id="test-results"></div>
+    
+    <script src="coordinates.js"></script>
+    <script src="holeinfo.js"></script>
+    <script>
+        const results = document.getElementById('test-results');
+        
+        // Test if scripts loaded
+        results.innerHTML += '<p>Coordinates loaded: ' + (typeof holeCoordinates !== 'undefined') + '</p>';
+        results.innerHTML += '<p>HoleInfo loaded: ' + (typeof holeInfo !== 'undefined') + '</p>';
+        results.innerHTML += '<p>Leaflet available: ' + (typeof L !== 'undefined') + '</p>';
+        
+        if (typeof holeCoordinates !== 'undefined') {
+            results.innerHTML += '<p>Number of holes: ' + holeCoordinates.length + '</p>';
+            results.innerHTML += '<p>First hole: ' + JSON.stringify(holeCoordinates[0]) + '</p>';
+        }
+    </script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        setTimeout(() => {
+            const results = document.getElementById('test-results');
+            results.innerHTML += '<p>Leaflet available after delay: ' + (typeof L !== 'undefined') + '</p>';
+        }, 1000);
+    </script>
+</body>
+</html>

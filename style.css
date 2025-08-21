@@ -239,8 +239,17 @@ input {
 }
 
 #map {
-	padding: 15px;
+	width: 100%;
+	height: 480px;
+	padding: 0; /* Leaflet expects the map container to be the exact size */
+	background: white;
 	/* display controlled by Vue.js v-show */
+}
+
+/* Ensure the Leaflet internal container expands to the parent size */
+.leaflet-container {
+	width: 100%;
+	height: 100%;
 }
 
 .images-half {

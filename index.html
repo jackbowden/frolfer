@@ -5,7 +5,14 @@
 		<title>Frolfer</title>
 		<!-- <script src="https://unpkg.com/vue" defer></script> -->
 		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
 		<script src="holeinfo.js" defer></script>
+		<script src="coordinates.js" defer></script>
 		<script src="script.js" defer></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
@@ -110,7 +117,6 @@
 						</div>
 
 						<div id="map" v-show="!showImages">
-							<iframe src="https://www.google.com/maps/d/u/1/embed?mid=1sF2h2uMQ23XYcj7APuWTyjHhxIA" width="100%" height="480" title="Map of the hole location"></iframe>
 						</div>
 					</div>
 				</div>
