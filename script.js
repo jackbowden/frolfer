@@ -36,15 +36,137 @@ const app = new Vue({
 		showImages: true,
 		map: null,
 		markers: [],
-		coordinates: coordinates
+		coordinates: coordinates,
+		showLeaderboard: false,
+		leaderboard: {
+			holeRecords: [], // best score for each hole
+			courseRecords: [], // best total scores
+			holeInOnes: [] // hole-in-one achievements
+		},
+		newRecords: [] // track new records this session
 	},
 	methods: {
 		startGame: function() {
 			this.gameStarted = true;
+			this.loadLeaderboard();
 			// initialize map once the game UI is visible
 			this.$nextTick(() => {
 				this.initMap();
 			});
+		},
+
+		loadLeaderboard: function() {
+			try {
+				const saved = localStorage.getItem('frolfer-leaderboard');
+				if (saved) {
+					this.leaderboard = JSON.parse(saved);
+				}
+				// Initialize if empty
+				if (!this.leaderboard.holeRecords.length) {
+					this.leaderboard.holeRecords = new Array(18).fill(null).map(() => null);
+				}
+			} catch (e) {
+				console.warn('Could not load leaderboard:', e);
+			}
+		},
+
+		saveLeaderboard: function() {
+			try {
+				localStorage.setItem('frolfer-leaderboard', JSON.stringify(this.leaderboard));
+			} catch (e) {
+				console.warn('Could not save leaderboard:', e);
+			}
+		},
+
+		toggleLeaderboard: function() {
+			this.showLeaderboard = !this.showLeaderboard;
+		},
+
+		checkForRecords: function(player, specificHole = null) {
+			const newRecords = [];
+			
+			// If specificHole is provided, only check that hole
+			// Otherwise check all holes (for course completion)
+			if (specificHole) {
+				const holeIndex = specificHole - 1;
+				const score = player.points[holeIndex];
+				
+				if (score > 0) {
+					const currentRecord = this.leaderboard.holeRecords[holeIndex];
+					if (!currentRecord || score < currentRecord.score) {
+						this.leaderboard.holeRecords[holeIndex] = {
+							player: player.name,
+							score: score,
+							date: new Date().toLocaleDateString()
+						};
+						newRecords.push(`Hole ${specificHole} record: ${score} throws!`);
+						
+						// Check for hole-in-one
+						if (score === 1) {
+							this.leaderboard.holeInOnes.push({
+								player: player.name,
+								hole: specificHole,
+								date: new Date().toLocaleDateString()
+							});
+							newRecords.push(`🎯 HOLE-IN-ONE on Hole ${specificHole}!`);
+						}
+					}
+				}
+			} else {
+				// Check hole records for all holes
+				for (let i = 0; i < 18; i++) {
+					const score = player.points[i];
+					if (score > 0) {
+						const currentRecord = this.leaderboard.holeRecords[i];
+						if (!currentRecord || score < currentRecord.score) {
+							this.leaderboard.holeRecords[i] = {
+								player: player.name,
+								score: score,
+								date: new Date().toLocaleDateString()
+							};
+							newRecords.push(`Hole ${i + 1} record: ${score} throws!`);
+							
+							// Check for hole-in-one
+							if (score === 1) {
+								this.leaderboard.holeInOnes.push({
+									player: player.name,
+									hole: i + 1,
+									date: new Date().toLocaleDateString()
+								});
+								newRecords.push(`🎯 HOLE-IN-ONE on Hole ${i + 1}!`);
+							}
+						}
+					}
+				}
+			}
+			
+			// Check course record (if all holes played)
+			const totalScore = this.total(player);
+			const holesPlayed = player.points.filter(p => p > 0).length;
+			if (holesPlayed === 18 && !specificHole) {
+				const currentCourseRecord = this.leaderboard.courseRecords.length > 0 ? 
+					Math.min(...this.leaderboard.courseRecords.map(r => r.score)) : Infinity;
+				
+				if (totalScore < currentCourseRecord) {
+					this.leaderboard.courseRecords.unshift({
+						player: player.name,
+						score: totalScore,
+						date: new Date().toLocaleDateString()
+					});
+					// Keep only top 10 course records
+					this.leaderboard.courseRecords = this.leaderboard.courseRecords.slice(0, 10);
+					newRecords.push(`🏆 NEW COURSE RECORD: ${totalScore} total throws!`);
+				}
+			}
+			
+			if (newRecords.length > 0) {
+				this.newRecords = this.newRecords.concat(newRecords);
+				this.saveLeaderboard();
+				// Clear new records after 10 seconds
+				setTimeout(() => {
+					this.newRecords = [];
+				}, 10000);
+			}
 		},
 
 		closeInstructions: function() {
@@ -141,6 +263,11 @@ const app = new Vue({
 
 		incHole: function() {
 			if (this.hole < 18) {
+				// Check for records on the hole we're leaving
+				this.players.forEach(player => {
+					this.checkForRecords(player, this.hole);
+				});
+				
 				this.hole++;
 				if (!this.showImages && this.map) {
 					this.updateMap();

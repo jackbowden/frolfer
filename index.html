@@ -47,6 +47,62 @@
 				</div>
 			</div>
 
+			<!-- Leaderboard Modal -->
+			<div id="leaderboard-modal" v-if="showLeaderboard" @click="showLeaderboard = false">
+				<div class="modal-content" @click.stop>
+					<div class="modal-header">
+						<h2>🏆 Course Records</h2>
+						<button @click="showLeaderboard = false" class="close-btn">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div v-if="leaderboard.courseRecords.length > 0">
+							<h3>🏆 Best Course Totals</h3>
+							<div class="record-list">
+								<div v-for="(record, index) in leaderboard.courseRecords.slice(0, 5)" :key="index" class="record-item">
+									<span class="rank">{{ index + 1 }}.</span>
+									<span class="player-name">{{ record.player }}</span>
+									<span class="score">{{ record.score }} throws</span>
+									<span class="date">{{ record.date }}</span>
+								</div>
+							</div>
+						</div>
+
+						<div v-if="leaderboard.holeInOnes.length > 0">
+							<h3>🎯 Hole-in-Ones</h3>
+							<div class="record-list">
+								<div v-for="(record, index) in leaderboard.holeInOnes.slice(0, 10)" :key="index" class="record-item">
+									<span class="player-name">{{ record.player }}</span>
+									<span class="hole-info">Hole {{ record.hole }}</span>
+									<span class="date">{{ record.date }}</span>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<h3>⭐ Best Hole Scores</h3>
+							<div class="hole-records">
+								<div v-for="(record, hole) in leaderboard.holeRecords" :key="hole" v-if="record" class="hole-record">
+									<span class="hole-num">Hole {{ hole + 1 }}</span>
+									<span class="player-name">{{ record.player }}</span>
+									<span class="score">{{ record.score }}</span>
+								</div>
+							</div>
+						</div>
+
+						<div v-if="leaderboard.courseRecords.length === 0 && leaderboard.holeInOnes.length === 0">
+							<p class="no-records">No records yet! Start playing to set some course records.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- New Records Notification -->
+			<div id="new-records" v-if="newRecords.length > 0">
+				<div v-for="record in newRecords" class="new-record-item">
+					{{ record }}
+				</div>
+			</div>
+
 			<!-- Instructions Modal -->
 			<div id="instructions-modal" v-if="showInstructions" @click="closeInstructions">
 				<div class="modal-content" @click.stop>
@@ -83,6 +139,7 @@
 				<div id="top-bar">
 					<h1>Frolfer</h1>
 					<div id="top-bar-controls">
+						<button @click="toggleLeaderboard" class="how-to-play-btn">🏆 Records</button>
 						<button @click="showInstructions = true" class="how-to-play-btn">How to Play</button>
 						<div id="hole-select">
 							<p><button @click="decHole">&lt;</button> Hole {{ hole }} <button @click="incHole">&gt;</button></p>

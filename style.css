@@ -267,6 +267,107 @@ input {
 	transform: translateY(-6px);
 }
 
+/* Leaderboard Styles */
+#leaderboard-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.record-list, .hole-records {
+	margin-bottom: 20px;
+}
+
+.record-item, .hole-record {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.rank {
+	font-weight: bold;
+	color: #b9975b;
+	min-width: 30px;
+}
+
+.player-name {
+	font-weight: bold;
+	flex: 1;
+	color: #115740;
+}
+
+.score {
+	font-weight: bold;
+	color: #e74c3c;
+	min-width: 80px;
+	text-align: right;
+}
+
+.hole-info {
+	color: #555;
+	min-width: 60px;
+}
+
+.date {
+	color: #999;
+	font-size: 0.9em;
+	min-width: 80px;
+	text-align: right;
+}
+
+.hole-num {
+	min-width: 60px;
+	color: #115740;
+	font-weight: bold;
+}
+
+.no-records {
+	text-align: center;
+	color: #999;
+	font-style: italic;
+	padding: 40px 20px;
+}
+
+/* New Records Notification */
+#new-records {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1001;
+	max-width: 300px;
+}
+
+.new-record-item {
+	background: linear-gradient(135deg, #f39c12, #e67e22);
+	color: white;
+	padding: 12px 16px;
+	margin-bottom: 8px;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+	font-weight: bold;
+	animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+	from {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
 .images-half {
 	padding-top: 10px;
 	text-align: center;
