@@ -16,8 +16,10 @@ function Player(name) {
 function pinSvgDataUrl(color) {
 		const svg = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 48">
-	<path d="M12 4C7 4 3.4 7.6 3.4 12.6c0 6.9 8.6 20.8 8.6 20.8s8.6-13.9 8.6-20.8C20.6 7.6 17 4 12 4z" fill="${color}"/>
-	<circle cx="12" cy="12.6" r="3.5" fill="#ffffff"/>
+	<!-- white outline for contrast -->
+	<path d="M12 4C7 4 3.4 7.6 3.4 12.6c0 6.9 8.6 20.8 8.6 20.8s8.6-13.9 8.6-20.8C20.6 7.6 17 4 12 4z" fill="${color}" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+	<!-- inner white circle with subtle dark ring -->
+	<circle cx="12" cy="12.6" r="4" fill="#ffffff" stroke="#444" stroke-width="1"/>
 </svg>`;
 		return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
@@ -79,15 +81,15 @@ const app = new Vue({
 				// Adjust iconAnchor so the visible pin tip (not the viewBox bottom) is used
 				this.startIcon = L.icon({
 					iconUrl: pinSvgDataUrl('#2ecc71'), // green
-					iconSize: [24, 39],
-					iconAnchor: [12, 24], // anchor near the pin tip within the SVG
-					popupAnchor: [0, -22]
+					iconSize: [32, 52],
+					iconAnchor: [16, 36], // anchor near the pin tip within the SVG
+					popupAnchor: [0, -30]
 				});
 				this.finishIcon = L.icon({
 					iconUrl: pinSvgDataUrl('#e74c3c'), // red
-					iconSize: [24, 39],
-					iconAnchor: [12, 24],
-					popupAnchor: [0, -22]
+					iconSize: [32, 52],
+					iconAnchor: [16, 36],
+					popupAnchor: [0, -30]
 				});
 			}
 			// ensure correct sizing in case container was hidden
@@ -121,6 +123,15 @@ const app = new Vue({
 						marker = L.marker([coord.lat, coord.lon]).addTo(this.map);
 					}
 					marker.bindPopup('<b>' + coord.name + '</b><br>' + (coord.description || '') );
+					// add a permanent label above the pin
+					try {
+						marker.bindTooltip(coord.name, {
+							permanent: true,
+							direction: 'top',
+							offset: [0, -34],
+							className: 'marker-label'
+						}).openTooltip();
+					} catch (e) {}
 					this.markers.push(marker);
 					bounds.push([coord.lat, coord.lon]);
 				});
